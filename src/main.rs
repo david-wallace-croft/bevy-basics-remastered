@@ -1,5 +1,5 @@
 use self::player::Player;
-// use self::player::player_look;
+use self::player::player_look;
 use ::bevy::prelude::*;
 
 mod player;
@@ -11,14 +11,13 @@ fn main() {
 
   app.add_systems(Startup, (spawn_camera, spawn_map));
 
-  //   app.add_systems(Update, (player_look));
+  app.add_systems(Update, player_look);
 
   let _app_exit: AppExit = app.run();
 }
 
 fn spawn_camera(mut commands: Commands) {
-  //   commands.spawn((Camera3d::default(), Player));
-  commands.spawn(Camera3d::default());
+  commands.spawn((Camera3d::default(), Player));
 }
 
 fn spawn_map(
