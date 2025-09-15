@@ -1,7 +1,9 @@
+use self::grab_event::apply_grab;
 use self::player::Player;
 use self::player::player_look;
 use ::bevy::prelude::*;
 
+mod grab_event;
 mod player;
 
 fn main() {
@@ -12,6 +14,8 @@ fn main() {
   app.add_systems(Startup, (spawn_camera, spawn_map));
 
   app.add_systems(Update, player_look);
+
+  app.add_observer(apply_grab);
 
   let _app_exit: AppExit = app.run();
 }
