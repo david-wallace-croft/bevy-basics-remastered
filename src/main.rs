@@ -1,7 +1,11 @@
+use crate::grab_event::focus_events;
+use crate::grab_event::toggle_grab;
+
 use self::grab_event::apply_grab;
 use self::player::Player;
 use self::player::player_look;
 use ::bevy::prelude::*;
+use bevy::input::common_conditions::input_just_released;
 
 mod grab_event;
 mod player;
@@ -13,7 +17,14 @@ fn main() {
 
   app.add_systems(Startup, (spawn_camera, spawn_map));
 
-  app.add_systems(Update, player_look);
+  app.add_systems(
+    Update,
+    (
+      player_look,
+      focus_events,
+      toggle_grab.run_if(input_just_released(KeyCode::Escape)),
+    ),
+  );
 
   app.add_observer(apply_grab);
 
