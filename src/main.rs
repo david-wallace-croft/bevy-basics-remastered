@@ -1,14 +1,16 @@
-use crate::grab_event::focus_events;
-use crate::grab_event::toggle_grab;
-
 use self::grab_event::apply_grab;
+use self::grab_event::focus_events;
+use self::grab_event::toggle_grab;
 use self::player::Player;
 use self::player::player_look;
+use self::player::player_move;
+use ::bevy::input::common_conditions::input_just_released;
 use ::bevy::prelude::*;
-use bevy::input::common_conditions::input_just_released;
 
+mod constants;
 mod grab_event;
 mod player;
+mod player_speed;
 
 fn main() {
   let mut app = App::new();
@@ -21,6 +23,7 @@ fn main() {
     Update,
     (
       player_look,
+      player_move.after(player_look),
       focus_events,
       toggle_grab.run_if(input_just_released(KeyCode::Escape)),
     ),
