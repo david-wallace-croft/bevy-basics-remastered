@@ -65,5 +65,5 @@ pub fn player_move(
 
   to_move = to_move.normalize_or_zero();
 
-  player.translation = to_move * time.delta_secs() * SPEED;
+  player.translation += to_move * time.delta_secs() * SPEED;
 }
