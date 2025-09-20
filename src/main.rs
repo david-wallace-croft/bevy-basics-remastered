@@ -1,3 +1,6 @@
+use self::ball_spawn::BallSpawn;
+use self::ball_spawn::shoot_ball;
+use self::ball_spawn::spawn_ball;
 use self::grab_event::apply_grab;
 use self::grab_event::focus_events;
 use self::grab_event::toggle_grab;
@@ -7,6 +10,7 @@ use self::player::player_move;
 use ::bevy::input::common_conditions::input_just_released;
 use ::bevy::prelude::*;
 
+mod ball_spawn;
 mod constants;
 mod grab_event;
 mod player;
@@ -26,10 +30,14 @@ fn main() {
       player_move.after(player_look),
       focus_events,
       toggle_grab.run_if(input_just_released(KeyCode::Escape)),
+      spawn_ball,
+      shoot_ball.before(spawn_ball).before(focus_events),
     ),
   );
 
   app.add_observer(apply_grab);
+
+  app.add_event::<BallSpawn>();
 
   let _app_exit: AppExit = app.run();
 }
