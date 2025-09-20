@@ -1,3 +1,4 @@
+use self::ball_data::BallData;
 use self::ball_spawn::BallSpawn;
 use self::ball_spawn::shoot_ball;
 use self::ball_spawn::spawn_ball;
@@ -10,6 +11,7 @@ use self::player::player_move;
 use ::bevy::input::common_conditions::input_just_released;
 use ::bevy::prelude::*;
 
+mod ball_data;
 mod ball_spawn;
 mod constants;
 mod grab_event;
@@ -38,6 +40,8 @@ fn main() {
   app.add_observer(apply_grab);
 
   app.add_event::<BallSpawn>();
+
+  app.init_resource::<BallData>();
 
   let _app_exit: AppExit = app.run();
 }

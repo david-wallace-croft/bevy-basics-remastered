@@ -1,3 +1,4 @@
+use super::ball_data::BallData;
 use super::player::Player;
 use ::bevy::prelude::*;
 use ::bevy::window::PrimaryWindow;
@@ -29,14 +30,13 @@ pub fn shoot_ball(
 pub fn spawn_ball(
   mut events: EventReader<BallSpawn>,
   mut commands: Commands,
-  mut mesh_assets: ResMut<Assets<Mesh>>,
-  mut mat_assets: ResMut<Assets<StandardMaterial>>,
+  ball_data: Res<BallData>,
 ) {
   for spawn in events.read() {
     commands.spawn((
       Transform::from_translation(spawn.position),
-      Mesh3d(mesh_assets.add(Sphere::new(1.))),
-      MeshMaterial3d(mat_assets.add(StandardMaterial::default())),
+      Mesh3d(ball_data.mesh()),
+      MeshMaterial3d(ball_data.material()),
     ));
   }
 }
