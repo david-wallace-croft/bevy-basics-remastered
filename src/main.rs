@@ -8,6 +8,7 @@ use self::grab_event::toggle_grab;
 use self::player::Player;
 use self::player::player_look;
 use self::player::player_move;
+use self::velocity::apply_velocity;
 use ::bevy::input::common_conditions::input_just_released;
 use ::bevy::prelude::*;
 
@@ -17,6 +18,7 @@ mod constants;
 mod grab_event;
 mod player;
 mod player_speed;
+mod velocity;
 
 fn main() {
   let mut app = App::new();
@@ -24,6 +26,10 @@ fn main() {
   app.add_plugins(DefaultPlugins);
 
   app.add_systems(Startup, (spawn_camera, spawn_map));
+
+  app.insert_resource(Time::<Fixed>::from_hz(30.));
+
+  app.add_systems(FixedUpdate, apply_velocity);
 
   app.add_systems(
     Update,

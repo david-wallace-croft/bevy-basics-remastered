@@ -1,11 +1,13 @@
 use super::ball_data::BallData;
 use super::player::Player;
+use super::velocity::Velocity;
 use ::bevy::prelude::*;
 use ::bevy::window::PrimaryWindow;
 
 #[derive(Event)]
 pub struct BallSpawn {
   position: Vec3,
+  velocity: Vec3,
 }
 
 pub fn shoot_ball(
@@ -24,6 +26,7 @@ pub fn shoot_ball(
 
   spawner.write(BallSpawn {
     position: player.translation,
+    velocity: player.forward().as_vec3() * 15.,
   });
 }
 
@@ -37,6 +40,7 @@ pub fn spawn_ball(
       Transform::from_translation(spawn.position),
       Mesh3d(ball_data.mesh()),
       MeshMaterial3d(ball_data.material()),
+      Velocity(spawn.velocity),
     ));
   }
 }
