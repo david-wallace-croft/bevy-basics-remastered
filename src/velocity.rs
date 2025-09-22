@@ -1,6 +1,6 @@
 use ::bevy::prelude::*;
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct Velocity(pub Vec3);
 
 pub fn apply_velocity(

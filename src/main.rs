@@ -5,6 +5,7 @@ use self::ball_spawn::spawn_ball;
 use self::grab_event::apply_grab;
 use self::grab_event::focus_events;
 use self::grab_event::toggle_grab;
+use self::gravity::apply_gravity;
 use self::player::Player;
 use self::player::player_look;
 use self::player::player_move;
@@ -16,6 +17,7 @@ mod ball_data;
 mod ball_spawn;
 mod constants;
 mod grab_event;
+mod gravity;
 mod player;
 mod player_speed;
 mod velocity;
@@ -29,7 +31,10 @@ fn main() {
 
   app.insert_resource(Time::<Fixed>::from_hz(30.));
 
-  app.add_systems(FixedUpdate, apply_velocity);
+  app.add_systems(
+    FixedUpdate,
+    (apply_velocity, apply_gravity.before(apply_velocity)),
+  );
 
   app.add_systems(
     Update,
