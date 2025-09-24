@@ -2,6 +2,7 @@ use self::ball_data::BallData;
 use self::ball_spawn::BallSpawn;
 use self::ball_spawn::shoot_ball;
 use self::ball_spawn::spawn_ball;
+use self::bounce::bounce;
 use self::grab_event::apply_grab;
 use self::grab_event::focus_events;
 use self::grab_event::toggle_grab;
@@ -15,6 +16,7 @@ use ::bevy::prelude::*;
 
 mod ball_data;
 mod ball_spawn;
+mod bounce;
 mod constants;
 mod grab_event;
 mod gravity;
@@ -33,7 +35,11 @@ fn main() {
 
   app.add_systems(
     FixedUpdate,
-    (apply_velocity, apply_gravity.before(apply_velocity)),
+    (
+      apply_velocity,
+      apply_gravity.before(apply_velocity),
+      bounce.after(apply_velocity),
+    ),
   );
 
   app.add_systems(
