@@ -24,6 +24,7 @@ mod gravity;
 mod player;
 mod player_speed;
 mod power;
+mod power_bar;
 mod velocity;
 
 fn main() {
@@ -96,6 +97,19 @@ fn spawn_map(
       Transform::from_translation(Vec3::new((-8. + h as f32) * 2., 0., -50.)),
       Mesh3d(ball_mesh.clone()),
       MeshMaterial3d(ball_material),
+    ));
+
+    commands.spawn((
+      Node {
+        bottom: Val::Px(20.),
+        height: Val::VMax(5.),
+        left: Val::Px(20.),
+        position_type: PositionType::Absolute,
+        width: Val::VMax(30.),
+        ..Default::default()
+      },
+      BackgroundColor(Color::linear_rgb(0.5, 0.5, 0.5)),
+      BorderRadius::all(Val::VMax(5.)),
     ));
   }
 }
