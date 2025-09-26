@@ -10,6 +10,7 @@ use self::gravity::apply_gravity;
 use self::player::Player;
 use self::player::player_look;
 use self::player::player_move;
+use self::power::Power;
 use self::velocity::apply_velocity;
 use ::bevy::input::common_conditions::input_just_released;
 use ::bevy::prelude::*;
@@ -22,6 +23,7 @@ mod grab_event;
 mod gravity;
 mod player;
 mod player_speed;
+mod power;
 mod velocity;
 
 fn main() {
@@ -59,6 +61,11 @@ fn main() {
   app.add_event::<BallSpawn>();
 
   app.init_resource::<BallData>();
+
+  app.insert_resource(Power {
+    charging: false,
+    current: 0.,
+  });
 
   let _app_exit: AppExit = app.run();
 }

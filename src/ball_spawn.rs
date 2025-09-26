@@ -1,5 +1,6 @@
 use super::ball_data::BallData;
 use super::player::Player;
+use super::power::Power;
 use super::velocity::Velocity;
 use ::bevy::prelude::*;
 use ::bevy::window::PrimaryWindow;
@@ -14,7 +15,7 @@ pub struct BallSpawn {
 pub fn shoot_ball(
   input: Res<ButtonInput<MouseButton>>,
   player: Single<&Transform, With<Player>>,
-  mut power: Local<Option<f32>>,
+  mut power: ResMut<Power>,
   mut spawner: EventWriter<BallSpawn>,
   time: Res<Time>,
   window: Single<&Window, With<PrimaryWindow>>,
@@ -23,24 +24,28 @@ pub fn shoot_ball(
     return;
   }
 
-  if let Some(current) = power.as_mut() {
+  if power.charging {
     if input.just_released(MouseButton::Left) {
       spawner.write(BallSpawn {
         position: player.translation,
-        power: *current,
+        power: power.current,
         velocity: player.forward().as_vec3() * 15.,
       });
     }
 
     if input.pressed(MouseButton::Left) {
-      *current += time.delta_secs();
+      power.current += time.delta_secs();
+
+      power.current = power.current.clamp(1., 6.);
     } else {
-      *power = None
+      power.charging = false;
     }
   }
 
   if input.just_pressed(MouseButton::Left) {
-    *power = Some(1.);
+    power.charging = true;
+
+    power.current = 1.;
   }
 }
 
