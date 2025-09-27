@@ -3,6 +3,8 @@ use self::ball_spawn::BallSpawn;
 use self::ball_spawn::shoot_ball;
 use self::ball_spawn::spawn_ball;
 use self::bounce::bounce;
+use self::constants::MIN_FILL;
+use self::constants::NOT_CHARGING;
 use self::grab_event::apply_grab;
 use self::grab_event::focus_events;
 use self::grab_event::toggle_grab;
@@ -11,6 +13,8 @@ use self::player::Player;
 use self::player::player_look;
 use self::player::player_move;
 use self::power::Power;
+use self::power_bar::PowerBar;
+use self::power_bar::update_power_bar;
 use self::velocity::apply_velocity;
 use ::bevy::input::common_conditions::input_just_released;
 use ::bevy::prelude::*;
@@ -54,6 +58,7 @@ fn main() {
       toggle_grab.run_if(input_just_released(KeyCode::Escape)),
       spawn_ball,
       shoot_ball.before(spawn_ball).before(focus_events),
+      update_power_bar,
     ),
   );
 
@@ -99,17 +104,33 @@ fn spawn_map(
       MeshMaterial3d(ball_material),
     ));
 
-    commands.spawn((
-      Node {
-        bottom: Val::Px(20.),
-        height: Val::VMax(5.),
-        left: Val::Px(20.),
-        position_type: PositionType::Absolute,
-        width: Val::VMax(30.),
-        ..Default::default()
-      },
-      BackgroundColor(Color::linear_rgb(0.5, 0.5, 0.5)),
-      BorderRadius::all(Val::VMax(5.)),
-    ));
+    commands
+      .spawn((
+        Node {
+          bottom: Val::Px(20.),
+          height: Val::VMax(5.),
+          left: Val::Px(20.),
+          position_type: PositionType::Absolute,
+          width: Val::VMax(30.),
+          ..Default::default()
+        },
+        BackgroundColor(Color::linear_rgb(0.5, 0.5, 0.5)),
+        BorderRadius::all(Val::VMax(5.)),
+      ))
+      .with_child((
+        Node {
+          height: Val::Percent(95.),
+          margin: UiRect::all(Val::VMax(0.125)),
+          min_width: Val::VMax(MIN_FILL),
+          position_type: PositionType::Absolute,
+          ..Default::default()
+        },
+        BackgroundColor(NOT_CHARGING),
+        BorderRadius::all(Val::VMax(5.)),
+        PowerBar {
+          max: 6.,
+          min: 1.,
+        },
+      ));
   }
 }
