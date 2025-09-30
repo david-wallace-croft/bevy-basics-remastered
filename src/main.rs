@@ -31,8 +31,8 @@ mod power;
 mod power_bar;
 mod velocity;
 
-fn main() {
-  let mut app = App::new();
+fn main() -> AppExit {
+  let mut app: App = App::new();
 
   app.add_plugins(DefaultPlugins);
 
@@ -73,5 +73,7 @@ fn main() {
     current: 0.,
   });
 
-  let _app_exit: AppExit = app.run();
+  let app_exit: AppExit = app.run();
+
+  app_exit
 }
