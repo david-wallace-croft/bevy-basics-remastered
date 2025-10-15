@@ -3,9 +3,10 @@ use super::player::Player;
 use super::power::Power;
 use super::velocity::Velocity;
 use ::bevy::prelude::*;
+use ::bevy::window::CursorOptions;
 use ::bevy::window::PrimaryWindow;
 
-#[derive(Event)]
+#[derive(Message)]
 pub struct BallSpawn {
   position: Vec3,
   power: f32,
@@ -13,14 +14,14 @@ pub struct BallSpawn {
 }
 
 pub fn shoot_ball(
+  cursor_options: Single<&CursorOptions, With<PrimaryWindow>>,
   input: Res<ButtonInput<MouseButton>>,
   player: Single<&Transform, With<Player>>,
   mut power: ResMut<Power>,
-  mut spawner: EventWriter<BallSpawn>,
+  mut spawner: MessageWriter<BallSpawn>,
   time: Res<Time>,
-  window: Single<&Window, With<PrimaryWindow>>,
 ) {
-  if window.cursor_options.visible {
+  if cursor_options.visible {
     return;
   }
 
@@ -50,7 +51,7 @@ pub fn shoot_ball(
 }
 
 pub fn spawn_ball(
-  mut events: EventReader<BallSpawn>,
+  mut events: MessageReader<BallSpawn>,
   mut commands: Commands,
   ball_data: Res<BallData>,
 ) {

@@ -64,7 +64,7 @@ fn main() -> AppExit {
 
   app.add_observer(apply_grab);
 
-  app.add_event::<BallSpawn>();
+  app.add_message::<BallSpawn>();
 
   app.init_resource::<BallData>();
 

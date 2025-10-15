@@ -16,3 +16,4 @@
 ## History
 
 - 2025-09-10: Project started
+- 2025-10-15: Upddated from Bevy v0.16 to v0.17
