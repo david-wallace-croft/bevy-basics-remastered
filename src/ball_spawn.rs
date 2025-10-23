@@ -51,11 +51,11 @@ pub fn shoot_ball(
 }
 
 pub fn spawn_ball(
-  mut events: MessageReader<BallSpawn>,
+  mut messages: MessageReader<BallSpawn>,
   mut commands: Commands,
   ball_data: Res<BallData>,
 ) {
-  for spawn in events.read() {
+  for spawn in messages.read() {
     commands.spawn((
       Transform::from_translation(spawn.position),
       Mesh3d(ball_data.mesh()),

@@ -22,10 +22,10 @@ pub fn apply_grab(
 }
 
 pub fn focus_events(
-  mut events: MessageReader<WindowFocused>,
+  mut messages: MessageReader<WindowFocused>,
   mut commands: Commands,
 ) {
-  if let Some(event) = events.read().last() {
+  if let Some(event) = messages.read().last() {
     commands.trigger(GrabEvent(event.focused));
   }
 }
