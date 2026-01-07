@@ -1,12 +1,12 @@
 # Bevy Basics Remastered
 
 [![MIT licensed][mit-badge]][mit-url]
-[![Rust][status-badge]][status-url]
+[![CI][ci-badge]][ci-url]
 
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/blob/main/LICENSE.txt
-[status-badge]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/ci.yml/badge.svg
-[status-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/ci.yml
+[ci-badge]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/ci.yml/badge.svg
+[ci-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/ci.yml
 
 - Code adapted from
   - "Bevy Basics Remastered" by PhaestusFox
