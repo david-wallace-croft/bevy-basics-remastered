@@ -5,8 +5,8 @@
 
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/blob/main/LICENSE.txt
-[status-badge]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/rust.yml/badge.svg
-[status-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/rust.yml
+[status-badge]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/ci.yml/badge.svg
+[status-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/ci.yml
 
 - Code adapted from
   - "Bevy Basics Remastered" by PhaestusFox
@@ -19,4 +19,4 @@
 ## History
 
 - 2025-09-10: Project started
-- 2025-10-15: Upddated from Bevy v0.16 to v0.17
+- 2025-10-15: Updated from Bevy v0.16 to v0.17

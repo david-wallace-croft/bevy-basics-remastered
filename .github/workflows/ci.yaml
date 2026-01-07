@@ -1,4 +1,4 @@
-name: CI
+# Derived from https://github.com/bevyengine/bevy_github_ci_template/
 
 on:
   push:
