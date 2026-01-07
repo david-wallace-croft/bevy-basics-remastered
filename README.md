@@ -1,9 +1,12 @@
-# Bevy Basic Remastered
+# Bevy Basics Remastered
 
 [![MIT licensed][mit-badge]][mit-url]
+[![Rust][status-badge]][status-url]
 
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/blob/main/LICENSE.txt
+[status-badge]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/rust.yml/badge.svg
+[status-url]: https://github.com/david-wallace-croft/bevy-basics-remastered/actions/workflows/rust.yml
 
 - Code adapted from
   - "Bevy Basics Remastered" by PhaestusFox
