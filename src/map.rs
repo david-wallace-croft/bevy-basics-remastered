@@ -27,33 +27,43 @@ pub fn spawn_map(
       MeshMaterial3d(ball_material),
     ));
 
-    commands
-      .spawn((
-        Node {
-          bottom: Val::Px(20.),
-          height: Val::VMax(5.),
-          left: Val::Px(20.),
-          position_type: PositionType::Absolute,
-          width: Val::VMax(30.),
-          ..Default::default()
-        },
-        BackgroundColor(Color::linear_rgb(0.5, 0.5, 0.5)),
-        BorderRadius::all(Val::VMax(5.)),
-      ))
-      .with_child((
-        Node {
-          height: Val::Percent(95.),
-          margin: UiRect::all(Val::VMax(0.125)),
-          min_width: Val::VMax(MIN_FILL),
-          position_type: PositionType::Absolute,
-          ..Default::default()
-        },
-        BackgroundColor(NOT_CHARGING),
-        BorderRadius::all(Val::VMax(5.)),
-        PowerBar {
-          max: 6.,
-          min: 1.,
-        },
-      ));
+    let border_radius_0: BorderRadius = BorderRadius::all(Val::VMax(5.));
+
+    let node_0: Node = Node {
+      border_radius: border_radius_0,
+      bottom: Val::Px(20.),
+      height: Val::VMax(5.),
+      left: Val::Px(20.),
+      position_type: PositionType::Absolute,
+      width: Val::VMax(30.),
+      ..Default::default()
+    };
+
+    let background_color_0: BackgroundColor =
+      BackgroundColor(Color::linear_rgb(0.5, 0.5, 0.5));
+
+    let border_radius_1: BorderRadius = BorderRadius::all(Val::VMax(5.));
+
+    let node_1: Node = Node {
+      border_radius: border_radius_1,
+      height: Val::Percent(95.),
+      margin: UiRect::all(Val::VMax(0.125)),
+      min_width: Val::VMax(MIN_FILL),
+      position_type: PositionType::Absolute,
+      ..Default::default()
+    };
+
+    let background_color_1: BackgroundColor = BackgroundColor(NOT_CHARGING);
+
+    let power_bar_1: PowerBar = PowerBar {
+      max: 6.,
+      min: 1.,
+    };
+
+    commands.spawn((node_0, background_color_0)).with_child((
+      node_1,
+      background_color_1,
+      power_bar_1,
+    ));
   }
 }

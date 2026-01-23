@@ -22,3 +22,4 @@
 
 - 2025-09-10: Project started
 - 2025-10-15: Updated from Bevy v0.16 to v0.17
+- 2026-01-22: Updated from Bevy v0.17 to v0.18
