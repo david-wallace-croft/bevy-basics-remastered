@@ -17,6 +17,7 @@
 ## Usage
 
 - cargo run
+- To fire, hold down the left mouse button for a few seconds and then release
 
 ## History
 

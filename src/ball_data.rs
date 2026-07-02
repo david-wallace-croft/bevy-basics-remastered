@@ -1,7 +1,7 @@
 use ::bevy::ecs::world::World;
 use ::bevy::prelude::*;
 use ::rand::SeedableRng;
-use ::rand::rngs::StdRng;
+use ::rand::rngs::{StdRng, SysRng};
 use ::rand::seq::IndexedRandom;
 use ::std::sync::{Mutex, MutexGuard};
 
@@ -18,6 +18,7 @@ impl BallData {
 
     self.materials.choose(&mut *rng).unwrap().clone()
   }
+
   pub fn mesh(&self) -> Handle<Mesh> {
     self.mesh.clone()
   }
@@ -28,7 +29,9 @@ impl FromWorld for BallData {
     let mesh: Handle<Mesh> =
       world.resource_mut::<Assets<Mesh>>().add(Sphere::new(1.));
 
-    let rng: Mutex<StdRng> = Mutex::new(StdRng::from_os_rng());
+    let std_rng: StdRng = StdRng::try_from_rng(&mut SysRng).unwrap();
+
+    let rng: Mutex<StdRng> = Mutex::new(std_rng);
 
     let mut materials: Vec<Handle<StandardMaterial>> = Default::default();
 
